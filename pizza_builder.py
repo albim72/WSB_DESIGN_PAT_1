@@ -23,3 +23,35 @@ class Pizza:
         print(f'preparing the {self.dough.name} dough of your {self}')
         time.sleep(STEP_DELAY)
         print(f'done with the {self.dough.name} dough')
+
+class MaragritaBuilder:
+    def __init__(self):
+        self.pizza = Pizza('Maragrita')
+        self.progress = PizzaProgress.queue
+        self.baking_time = 5
+
+    def prepare_dough(self):
+        self.progress = PizzaProgress.preparation
+        self.pizza.prepare_dough(PizzaDough.thin)
+
+    def add_sauce(self):
+        print(f'adding tomato souce to your Margarita...')
+        self.pizza.sauce = PizzaSauce.tomato
+        time.sleep(STEP_DELAY)
+        print('done with the tomato sauce')
+
+    def add_topping(self):
+        topping_desc = 'podwójna mozarella, oregano'
+        topping_items = (PizzaTopping.double_mozarella, PizzaTopping.oregano)
+        print(f'adding the toping({topping_desc}) to your Margarita')
+        self.pizza.topping.append([t for t in topping_items])
+        time.sleep(STEP_DELAY)
+        print(f'done with the topping({topping_desc}')
+
+    def bake(self):
+        self.progress = PizzaProgress.baking
+        print(f'baking your margarita for {self.baking_time} s')
+        time.sleep(self.baking_time)
+        self.progress = PizzaProgress.ready
+        print('Your Margarita is ready!!!')
+        
