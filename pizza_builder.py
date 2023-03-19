@@ -61,7 +61,7 @@ class CreamyBaconBuilder:
         self.pizza = Pizza('Creamy Bacon')
         self.progress = PizzaProgress.queue
         self.baking_time = 7
- 
+
     def prepare_dough(self):
         self.progress = PizzaProgress.preparation
         self.pizza.prepare_dough(PizzaDough.thick)
@@ -92,3 +92,24 @@ class CreamyBaconBuilder:
         time.sleep(self.baking_time)
         self.progress = PizzaProgress.ready
         print('Your Creamy Bacon is ready!!!')
+        
+        
+class Waiter:
+    def __init__(self):
+        self.builder = None
+        
+    def construct_pizza(self,builder):
+        self.builder = builder
+        steps = (builder.prepare_dough,
+                 builder.add_sauce,
+                 builder.add_topping,
+                 builder.bake)
+        [step() for step in steps]
+        
+    @property
+    def pizza(self):
+        return self.builder.pizza
+    
+    
+
+
